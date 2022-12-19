@@ -1,0 +1,72 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/DeepRank/deeprank-core:
+      branch: main
+      repo: https://github.com/DeepRank/deeprank-core
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/DeepRank/deeprank-core git:
+        commands:
+        - /usr/bin/env sh .sqa/script.jumpy-cream-squid.sh
+        container: qc.acc_sunny-puce-tetra
+  QC.Doc:
+    repos:
+      github.com/DeepRank/deeprank-core find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.nippy-brown-tamarin.sh
+        container: qc.doc_nerdy-crimson-rabbit
+      github.com/DeepRank/deeprank-core git:
+        commands:
+        - /usr/bin/env sh .sqa/script.squirrely-burgundy-swan.sh
+        container: qc.doc_muggy-mauve-mastiff
+      github.com/DeepRank/deeprank-core markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.squeaky-wisteria-hamster.sh
+        container: qc.doc_scanty-asparagus-squid
+      github.com/DeepRank/deeprank-core restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-black-dugong.sh
+        container: qc.doc_cranky-sapphire-spider
+  QC.Lic:
+    repos:
+      github.com/DeepRank/deeprank-core licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-apricot-ant.sh
+        container: qc.lic_tacky-persimmon-bombay
+  QC.Met:
+    repos:
+      github.com/DeepRank/deeprank-core cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-linen-toad.sh
+        container: qc.met_breezy-white-vulture
+  QC.Sec:
+    repos:
+      github.com/DeepRank/deeprank-core bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-violet-rabbit.sh
+        container: qc.sec_flaky-indigo-rattlesnake
+  QC.Sty:
+    repos:
+      github.com/DeepRank/deeprank-core flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-amaranth-starfish.sh
+        container: qc.sty_nippy-brass-antelope
+      github.com/DeepRank/deeprank-core jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.woolly-russet-dragonfly.sh
+        container: qc.sty_sickly-wisteria-wallaby
+  QC.Ver:
+    repos:
+      github.com/DeepRank/deeprank-core get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-malachite-caracal.sh
+        container: qc.ver_tasty-fuchsia-akita
+timeout: 5400
